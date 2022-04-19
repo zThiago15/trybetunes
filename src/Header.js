@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { getUser } from './services/userAPI';
 import Loading from './pages/Loading';
-import { Link } from 'react-router-dom';
 
 export default class Header extends Component {
   constructor() {
