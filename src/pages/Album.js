@@ -36,7 +36,7 @@ export default class Album extends Component {
   };
 
   render() {
-    const { songs, loading, artistName, artworkUrl100, collectionName } = this.state;
+    const { songs, artistName, artworkUrl100, collectionName } = this.state;
     return (
       <div data-testid="page-album">
         <Header />
@@ -45,7 +45,11 @@ export default class Album extends Component {
           <h1 data-testid="album-name">{collectionName}</h1>
           <h2 data-testid="artist-name">{artistName}</h2>
         </div>
-        {songs.map((song) => <MusicCard key={ song.trackId } song={ song } />)}
+
+        {songs.map((song, index) => (
+          <MusicCard key={ index } song={ song } />
+        ))}
+
       </div>
     );
   }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addSong } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 export default class MusicCard extends Component {
@@ -8,9 +8,36 @@ export default class MusicCard extends Component {
     this.state = {
       isFavorite: false,
       loading: false,
+      favorites: '',
     };
 
     this.favoriteSong = this.favoriteSong.bind(this);
+    this.checkIfSongIsFavorited = this.checkIfSongIsFavorited.bind(this);
+  }
+
+  componentDidMount() {
+    this.setState({
+      loading: true,
+    }, async () => {
+      const favorites = await getFavoriteSongs();
+
+      this.setState({
+        favorites, // lista de favoritos
+        loading: false,
+      }, () => this.checkIfSongIsFavorited()); // checar se é favorito depois de definir state com a lista
+    });
+  }
+
+  checkIfSongIsFavorited() {
+    const { song } = this.props;
+    const { favorites } = this.state;
+
+    // checar se na lista de favoritos, contem esta musica
+    const isFavorite = favorites.some((favoriteSong) => favoriteSong.trackId === song.trackId );
+
+    this.setState({
+      isFavorite,
+    });
   }
 
   favoriteSong({ target }) {
