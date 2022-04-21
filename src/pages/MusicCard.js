@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { addSong, getFavoriteSongs } from '../services/favoriteSongsAPI';
+import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
 export default class MusicCard extends Component {
@@ -16,6 +16,9 @@ export default class MusicCard extends Component {
   }
 
   componentDidMount() {
+    const { isFavorite } = this.state;
+    const { song } = this.props;
+
     this.setState({
       loading: true,
     }, async () => {
@@ -40,14 +43,19 @@ export default class MusicCard extends Component {
     });
   }
 
-  favoriteSong({ target }) {
+  favoriteSong({ target: { checked } }) {
     const { song } = this.props;
 
     this.setState({
-      isFavorite: target.checked,
+      isFavorite: checked,
       loading: true,
     }, async () => {
-      await addSong(song);
+      if (!checked) {
+        // se a música não estiver favoritada, removê-la
+        await removeSong(song);
+      } else {
+        await addSong(song);
+      }
 
       this.setState({
         loading: false,

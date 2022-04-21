@@ -43,27 +43,29 @@ export default class Login extends Component {
     return (
       <div data-testid="page-login">
 
-        {loading && <Loading />}
-        <form onSubmit={ this.submitData }>
-          <label htmlFor="name">
-            Nome:
-            <input
-              name="name"
-              onChange={ this.handleChange }
-              value={ name }
-              data-testid="login-name-input"
-              minLength="3"
-            />
-          </label>
+        {loading ? <Loading /> : (
+          <form onSubmit={ this.submitData }>
+            <label htmlFor="name">
+              Nome:
+              <input
+                name="name"
+                onChange={ this.handleChange }
+                value={ name }
+                data-testid="login-name-input"
+                minLength="3"
+              />
+            </label>
 
-          <button
-            type="submit"
-            data-testid="login-submit-button"
-            disabled={ name.length < minLength }
-          >
-            Entrar
-          </button>
-        </form>
+            <button
+              type="submit"
+              data-testid="login-submit-button"
+              disabled={ name.length < minLength }
+            >
+              Entrar
+            </button>
+          </form>
+        )}
+
       </div>
     );
   }
