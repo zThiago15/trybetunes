@@ -9,27 +9,28 @@ export default class Profile extends Component {
   constructor() {
     super();
     this.state = {
+      loading: false,
       dataUser: '',
     };
   }
 
   componentDidMount() {
-    // recuperar dados e colocar no state
+    // recuperar dados do usuário e colocar no state
     this.setState({
       loading: true,
     }, async () => {
       const dataUser = await getUser();
 
       this.setState({
-        loading: false,
         dataUser,
+        loading: false,
       });
     });
   }
 
   render() {
     const { dataUser, loading } = this.state;
-    const { name, description, email, image } = dataUser;
+    const { name, email, description, image } = dataUser;
 
     return (
       <div data-testid="page-profile">

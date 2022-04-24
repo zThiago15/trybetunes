@@ -31,20 +31,25 @@ export default class Header extends Component {
     const { loading, username: { name } } = this.state;
     return (
       <header data-testid="header-component">
-        <nav className="navHeader">
-          <ul><Link data-testid="link-to-search" to="/search">Search</Link></ul>
-          <ul>
-            <Link data-testid="link-to-favorites" to="/favorites">Favorite Songs</Link>
-          </ul>
-          <ul><Link data-testid="link-to-profile" to="/profile">Profile</Link></ul>
-        </nav>
 
         {loading === false ? (
-
-          <h1 data-testid="header-user-name">
-            {`Bem-vindo(a) ${name}`}
-          </h1>) : <Loading /> }
+          <>
+            <nav className="navHeader">
+              <ul><Link data-testid="link-to-search" to="/search">Search</Link></ul>
+              <ul>
+                <Link data-testid="link-to-favorites" to="/favorites">
+                  Favorite Songs
+                </Link>
+              </ul>
+              <ul><Link data-testid="link-to-profile" to="/profile">Profile</Link></ul>
+            </nav>
+            <h1 data-testid="header-user-name">
+              {`Bem-vindo(a) ${name}`}
+            </h1>
+          </>
+        ) : <Loading /> }
       </header>
+
     );
   }
 }
