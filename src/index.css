@@ -30,6 +30,7 @@ code {
 
 .editProfile {
   display: flex;
+  flex-direction: column;
   justify-content: space-around;
   width: 500px;
   margin: 0 auto;

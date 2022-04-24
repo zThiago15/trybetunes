@@ -50,11 +50,14 @@ export default class MusicCard extends Component {
     this.setState({
       isFavorite: checked,
       loading: true,
+
     }, async () => {
       if (!checked) {
         // se a música não estiver favoritada, removê-la
         await removeSong(song);
-        updateSongs();
+        if (updateSongs) {
+          updateSongs(); // Atualiza lista no Favorites.js
+        }
       } else {
         await addSong(song);
       }
