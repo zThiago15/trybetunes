@@ -75,6 +75,7 @@ export default class Search extends Component {
             </button>
           </form>
         )}
+
         {albums && <p>{`Resultado de álbuns de: ${nameArtist}`}</p>}
         {albums && albums.map((album) => {
           const { artistName, collectionId, collectionName, artworkUrl100 } = album;

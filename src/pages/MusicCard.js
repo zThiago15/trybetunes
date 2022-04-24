@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { addSong, getFavoriteSongs, removeSong } from '../services/favoriteSongsAPI';
 import Loading from './Loading';
 
@@ -16,9 +17,6 @@ export default class MusicCard extends Component {
   }
 
   componentDidMount() {
-    const { isFavorite } = this.state;
-    const { song } = this.props;
-
     this.setState({
       loading: true,
     }, async () => {
@@ -36,15 +34,18 @@ export default class MusicCard extends Component {
     const { favorites } = this.state;
 
     // checar se na lista de favoritos, contem esta musica
-    const isFavorite = favorites.some((favoriteSong) => favoriteSong.trackId === song.trackId );
+    const isFavorite = favorites.some(
+      (favoriteSong) => favoriteSong.trackId === song.trackId,
+    );
 
     this.setState({
       isFavorite,
     });
   }
 
-  favoriteSong({ target: { checked } }) {
-    const { song } = this.props;
+  favoriteSong({ target }) {
+    const { song, updateSongs } = this.props;
+    const { checked } = target;
 
     this.setState({
       isFavorite: checked,
@@ -53,6 +54,7 @@ export default class MusicCard extends Component {
       if (!checked) {
         // se a música não estiver favoritada, removê-la
         await removeSong(song);
+        updateSongs();
       } else {
         await addSong(song);
       }
@@ -64,7 +66,7 @@ export default class MusicCard extends Component {
   }
 
   render() {
-    const { trackName, previewUrl, trackId } = this.props.song;
+    const { song: { trackName, previewUrl, trackId } } = this.props;
     const { loading, isFavorite } = this.state;
 
     return (
@@ -81,6 +83,7 @@ export default class MusicCard extends Component {
             <label htmlFor="favorite">
               Favorita
               <input
+                id="favorite"
                 data-testid={ `checkbox-music-${trackId}` }
                 onChange={ this.favoriteSong }
                 type="checkbox"
@@ -88,9 +91,13 @@ export default class MusicCard extends Component {
               />
             </label>
           </>)}
-        {loading === true && <Loading />}
-
+        { loading && <Loading /> }
       </div>
     );
   }
 }
+
+MusicCard.propTypes = {
+  song: PropTypes.object,
+  desfavoriteSong: PropTypes.func,
+}.isRequired;

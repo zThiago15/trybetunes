@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import Header from '../Header';
 import getMusics from '../services/musicsAPI';
-import Loading from './Loading';
 import MusicCard from './MusicCard';
 
 export default class Album extends Component {
   constructor() {
     super();
     this.state = {
-      loading: 'not initialized',
       songs: [],
       artistName: '',
       artworkUrl100: '',
@@ -16,24 +15,23 @@ export default class Album extends Component {
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
+    const { match: { params } } = this.props;
+    const { id } = params;
 
     this.setState({
-      loading: true,
     }, async () => {
-      const songs = await getMusics(id);
+      const songs = await getMusics(id); // id do album
       // Atribuindo nome da banda/artista e album ao state
       const { artistName, artworkUrl100, collectionName } = songs[0];
 
       this.setState({
         songs,
-        loading: false,
         artistName,
         artworkUrl100,
         collectionName,
-       });
+      });
     });
-  };
+  }
 
   render() {
     const { songs, artistName, artworkUrl100, collectionName } = this.state;
@@ -49,8 +47,11 @@ export default class Album extends Component {
         {songs.map((song, index) => (
           <MusicCard key={ index } song={ song } />
         ))}
-
       </div>
     );
   }
 }
+
+Album.propTypes = {
+  match: PropTypes.object,
+}.isRequired;

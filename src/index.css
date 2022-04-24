@@ -21,3 +21,16 @@ code {
 .navHeader {
   display: flex;
 }
+
+#userPhoto {
+  width: 50px;
+  border-radius: 50%;
+  background-color: lightblue;
+}
+
+.editProfile {
+  display: flex;
+  justify-content: space-around;
+  width: 500px;
+  margin: 0 auto;
+}
