@@ -44,7 +44,7 @@ export default class Header extends Component {
               <ul><Link data-testid="link-to-profile" to="/profile">Profile</Link></ul>
             </nav>
             <h1 data-testid="header-user-name">
-              {`Bem-vindo(a) ${name}`}
+              { name }
             </h1>
           </>
         ) : <Loading /> }

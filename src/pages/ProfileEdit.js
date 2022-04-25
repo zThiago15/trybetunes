@@ -9,7 +9,7 @@ export default class ProfileEdit extends Component {
     super();
     this.state = {
       name: '',
-      email: '',
+      email: /^[a-z]+@[a-z]+\.[com]{2,}$/g,
       description: '',
       image: '',
       loading: false,
