@@ -1,0 +1,22 @@
+.upperHeader {
+  background-color: var(--dark-green);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 96px;
+}
+
+.upperHeader img {
+  margin: 18px 0;
+}
+
+.userBtn {
+  display: flex;
+  background-color: var(--white);
+  border-radius: 50px;
+  justify-content: space-evenly;
+  width: 200px;
+  height: 41px;
+  align-items: center;
+  font-size: small;
+}

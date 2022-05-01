@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Header';
+import Header from '../components/Header';
 import searchAlbumsAPI from '../services/searchAlbumsAPI';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 export default class Search extends Component {
   constructor() {
@@ -89,7 +89,8 @@ export default class Search extends Component {
               <img src={ artworkUrl100 } alt={ `Album ${collectionName}` } />
               <h2>{ collectionName }</h2>
               <p>{ artistName }</p>
-            </Link>);
+            </Link>
+          );
         })}
 
         {this.notFoundAlbum(albums) && <p>Nenhum álbum foi encontrado</p>}

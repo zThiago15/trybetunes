@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import Header from '../Header';
+import Header from '../components/Header';
 import { getUser } from '../services/userAPI';
 import '../index.css';
-import Loading from './Loading';
+import Loading from '../components/Loading';
 
 export default class Profile extends Component {
   constructor() {
