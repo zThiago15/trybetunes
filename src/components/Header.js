@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import defaultPhoto from '../images/no-user-photo.svg';
 import { getUser } from '../services/userAPI';
 import Loading from './Loading';
+import styles from '../css/Header.module.css';
+import logowhite from '../images/logo-white.svg';
 
 export default class Header extends Component {
   constructor() {
@@ -31,16 +33,21 @@ export default class Header extends Component {
   render() {
     const { loading, username: { name } } = this.state;
     return (
-      <header data-testid="header-component">
+      <header data-testid="header-component" className={ styles.header }>
 
         {loading === false ? (
           <>
-            <span>
-              <img src={ defaultPhoto } alt="Foto do usuário" />
-              <h1 data-testid="header-user-name">
-                { name }
-              </h1>
-            </span>
+            <div className={ styles.upperHeader }>
+              <img src={ logowhite } alt="Logo da Trybe" />
+
+              <span className={ styles.userBtn }>
+                <img src={ defaultPhoto } alt="Foto do usuário" />
+                <h1 data-testid="header-user-name">
+                  { name }
+                </h1>
+              </span>
+            </div>
+
             <nav className="navHeader">
               <ul><Link data-testid="link-to-search" to="/search">Search</Link></ul>
               <ul>
