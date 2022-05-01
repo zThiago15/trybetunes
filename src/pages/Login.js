@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { createUser } from '../services/userAPI';
 import Loading from './Loading';
+import styles from '../css/Login.module.css';
+import logo from '../images/logo.svg';
 
 export default class Login extends Component {
   constructor() {
@@ -41,29 +43,32 @@ export default class Login extends Component {
     const minLength = 3;
 
     return (
-      <div data-testid="page-login">
+      <div data-testid="page-login" className={ styles.container }>
 
         {loading ? <Loading /> : (
-          <form onSubmit={ this.submitData }>
-            <label htmlFor="name">
-              Nome:
-              <input
-                name="name"
-                onChange={ this.handleChange }
-                value={ name }
-                data-testid="login-name-input"
-                minLength="3"
-              />
-            </label>
+          <>
+            <img src={ logo } alt="Logo da Trybe" />
+            <form onSubmit={ this.submitData }>
+              <label htmlFor="name">
+                Nome:
+                <input
+                  name="name"
+                  onChange={ this.handleChange }
+                  value={ name }
+                  data-testid="login-name-input"
+                  minLength="3"
+                />
+              </label>
 
-            <button
-              type="submit"
-              data-testid="login-submit-button"
-              disabled={ name.length < minLength }
-            >
-              Entrar
-            </button>
-          </form>
+              <button
+                type="submit"
+                data-testid="login-submit-button"
+                disabled={ name.length < minLength }
+              >
+                Entrar
+              </button>
+            </form>
+          </>
         )}
 
       </div>

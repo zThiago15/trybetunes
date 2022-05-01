@@ -1,0 +1,9 @@
+.loading {
+  align-items: center;
+  color: var(--dark-green);
+  display: flex;
+  font-size: 50px;
+  justify-content: center;
+}
+
+/* alinhar no centro */
