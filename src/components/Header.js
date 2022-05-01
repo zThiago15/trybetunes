@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { getUser } from './services/userAPI';
-import Loading from './pages/Loading';
+import defaultPhoto from '../images/no-user-photo.svg';
+import { getUser } from '../services/userAPI';
+import Loading from './Loading';
 
 export default class Header extends Component {
   constructor() {
@@ -34,6 +35,12 @@ export default class Header extends Component {
 
         {loading === false ? (
           <>
+            <span>
+              <img src={ defaultPhoto } alt="Foto do usuário" />
+              <h1 data-testid="header-user-name">
+                { name }
+              </h1>
+            </span>
             <nav className="navHeader">
               <ul><Link data-testid="link-to-search" to="/search">Search</Link></ul>
               <ul>
@@ -43,9 +50,6 @@ export default class Header extends Component {
               </ul>
               <ul><Link data-testid="link-to-profile" to="/profile">Profile</Link></ul>
             </nav>
-            <h1 data-testid="header-user-name">
-              { name }
-            </h1>
           </>
         ) : <Loading /> }
       </header>
